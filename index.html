@@ -1,464 +1,504 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Play, 
-  CheckCircle2, 
-  ChevronRight, 
-  ShieldCheck, 
-  Zap, 
-  Video, 
-  Instagram, 
-  Mail, 
-  ArrowRight,
-  Menu,
-  X
-} from 'lucide-react';
-
-const App = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Handle sticky header background on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Smooth scroll helper
-  const scrollTo = (id) => {
-    setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-cyan-400 selection:text-zinc-950">
-      <style>{`
-        html { scroll-behavior: smooth; }
-        .clip-text {
-          background: linear-gradient(to right, #ffffff, #a1a1aa);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Co. | Content That Sells</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            zinc: {
+              50: '#fafafa',
+              100: '#f4f4f5',
+              300: '#d4d4d8',
+              400: '#a1a1aa',
+              500: '#71717a',
+              600: '#52525b',
+              700: '#3f3f46',
+              800: '#27272a',
+              900: '#18181b',
+              950: '#09090b',
+            },
+            cyan: {
+              300: '#67e8f9',
+              400: '#22d3ee',
+              500: '#06b6d4',
+            }
+          }
         }
-      `}</style>
+      }
+    }
+  </script>
 
-      {/* STICKY NAVIGATION */}
-      <header 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
-          isScrolled ? 'bg-zinc-950/90 backdrop-blur-md border-zinc-800 py-4' : 'bg-transparent border-transparent py-6'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="text-2xl font-extrabold tracking-tighter cursor-pointer flex items-center gap-2" onClick={() => scrollTo('hero')}>
-            <div className="w-8 h-8 bg-cyan-400 rounded-sm flex items-center justify-center text-zinc-950">
-              <Video size={20} weight="fill" />
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .clip-text {
+      background: linear-gradient(to right, #ffffff, #a1a1aa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-cyan-400 selection:text-zinc-950">
+
+  <!-- STICKY NAVIGATION -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-6">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      <a href="#hero" class="text-2xl font-extrabold tracking-tighter cursor-pointer flex items-center gap-2 scroll-link">
+        <div class="w-8 h-8 bg-cyan-400 rounded-sm flex items-center justify-center text-zinc-950">
+          <i data-lucide="video" class="w-5 h-5 fill-current"></i>
+        </div>
+        CREATIVE<span class="text-cyan-400">CO.</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
+        <a href="#services" class="scroll-link hover:text-cyan-400 transition-colors">WHAT WE DO</a>
+        <a href="#work" class="scroll-link hover:text-cyan-400 transition-colors">OUR WORK</a>
+        <a href="#pricing" class="scroll-link hover:text-cyan-400 transition-colors">PRICING</a>
+        <a href="#about" class="scroll-link hover:text-cyan-400 transition-colors">ABOUT</a>
+      </nav>
+
+      <div class="hidden md:block">
+        <a href="#contact" class="scroll-link bg-cyan-400 text-zinc-950 px-6 py-2.5 font-bold uppercase tracking-wide hover:bg-cyan-300 transition-transform hover:scale-105 active:scale-95 inline-block">
+          Book a Call
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-btn" class="md:hidden text-zinc-50">
+        <i data-lucide="menu" class="w-7 h-7"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="absolute top-full left-0 w-full bg-zinc-900 border-b border-zinc-800 hidden flex-col md:hidden py-4 px-6 gap-4 font-bold text-lg">
+      <a href="#services" class="scroll-link text-left py-2 hover:text-cyan-400">WHAT WE DO</a>
+      <a href="#work" class="scroll-link text-left py-2 hover:text-cyan-400">OUR WORK</a>
+      <a href="#pricing" class="scroll-link text-left py-2 hover:text-cyan-400">PRICING</a>
+      <a href="#about" class="scroll-link text-left py-2 hover:text-cyan-400">ABOUT</a>
+      <a href="#contact" class="scroll-link bg-cyan-400 text-zinc-950 px-6 py-3 mt-2 text-center w-full uppercase tracking-wide">
+        Book a Call
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 flex flex-col items-center text-center overflow-hidden">
+    <!-- Background Video -->
+    <div class="absolute inset-0 z-0 pointer-events-none bg-zinc-950">
+      <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-40">
+        <source src="SCPOOLS3.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/80 to-zinc-950"></div>
+    </div>
+
+    <!-- Subtle background glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    
+    <div class="max-w-5xl mx-auto relative z-10">
+      <h1 class="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter uppercase leading-[0.9] mb-8">
+        Turn Your <span class="text-cyan-400">Job Sites</span><br />
+        Into High-Quality<br />
+        Content That Sells.
+      </h1>
+      <p class="text-lg md:text-2xl text-zinc-400 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+        We film, edit, and create scroll-stopping videos & graphics for roofers, HVAC companies, and contractors—so you can focus on the work while we bring in the attention.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#contact" class="scroll-link w-full sm:w-auto bg-cyan-400 text-zinc-950 px-8 py-4 font-extrabold text-lg uppercase tracking-wider hover:bg-cyan-300 transition-all hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.3)]">
+          Book a Free Strategy Call
+        </a>
+        <a href="#work" class="scroll-link w-full sm:w-auto bg-transparent border-2 border-zinc-700 text-zinc-300 px-8 py-4 font-bold text-lg uppercase tracking-wider hover:border-zinc-50 hover:text-zinc-50 transition-all flex items-center justify-center gap-2">
+          See Our Work <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF / TRUST STRIP -->
+  <div class="border-y border-zinc-800 bg-zinc-900/50 py-8 px-6">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-8 md:gap-16 text-zinc-400 font-bold uppercase tracking-widest text-sm md:text-base text-center">
+      <div class="flex items-center gap-3">
+        <i data-lucide="shield-check" class="text-cyan-400 w-6 h-6"></i> Trusted by Local Contractors
+      </div>
+      <div class="flex items-center gap-3">
+        <i data-lucide="zap" class="text-cyan-400 w-6 h-6"></i> Fast Turnaround
+      </div>
+      <div class="flex items-center gap-3">
+        <i data-lucide="video" class="text-cyan-400 w-6 h-6"></i> Done-for-You System
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: WHAT WE DO -->
+  <section id="services" class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-6 leading-none">
+          We Turn Everyday Work Into <br/><span class="text-zinc-500">Content That Sells.</span>
+        </h2>
+        <p class="text-lg text-zinc-400 mb-6 leading-relaxed">
+          You're already doing the hard work—installing roofs, fixing systems, building projects. We capture that and turn it into high-performing content that builds trust, attracts leads, and positions you as the go-to in your area.
+        </p>
+        <p class="text-lg text-zinc-400 mb-8 leading-relaxed font-bold">
+          No gimmicks. No trends that don't convert. Just clean, professional content that makes people choose you.
+        </p>
+        
+        <ul class="space-y-4 mb-10">
+          <li class="flex items-start gap-3 text-lg font-medium">
+            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <span>On-site filming (we come to you)</span>
+          </li>
+          <li class="flex items-start gap-3 text-lg font-medium">
+            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <span>High-quality video editing</span>
+          </li>
+          <li class="flex items-start gap-3 text-lg font-medium">
+            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <span>Short-form content for Instagram, TikTok, Facebook</span>
+          </li>
+          <li class="flex items-start gap-3 text-lg font-medium">
+            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <span>Branded graphics & visuals</span>
+          </li>
+          <li class="flex items-start gap-3 text-lg font-medium">
+            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <span>Content strategy tailored to your business</span>
+          </li>
+        </ul>
+
+        <a href="#work" class="scroll-link text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2 hover:gap-4 transition-all group inline-flex">
+          See Examples <i data-lucide="chevron-right" class="group-hover:text-white transition-colors w-6 h-6"></i>
+        </a>
+      </div>
+      
+      <div class="relative">
+        <div class="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative border border-zinc-800">
+          <img src="https://images.unsplash.com/photo-1542385151-efd9000785a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Videographer filming contractor" class="w-full h-full object-cover opacity-60" />
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
+          
+          <div class="absolute bottom-8 left-8 right-8 bg-zinc-950/80 backdrop-blur border border-zinc-800 p-6 rounded text-sm font-mono">
+            <div class="flex justify-between items-center mb-4 border-b border-zinc-800 pb-2">
+              <span class="text-cyan-400">REC.</span>
+              <span class="text-red-500 animate-pulse">● 00:14:32</span>
             </div>
-            CREATIVE<span className="text-cyan-400">CO.</span>
+            <div class="space-y-2 text-zinc-400">
+              <div class="flex justify-between"><span>LENS</span> <span class="text-zinc-50">24MM f/1.4</span></div>
+              <div class="flex justify-between"><span>ISO</span> <span class="text-zinc-50">800</span></div>
+              <div class="flex justify-between"><span>LUT</span> <span class="text-cyan-400">CINEMATIC_01</span></div>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
-            <button onClick={() => scrollTo('services')} className="hover:text-cyan-400 transition-colors">WHAT WE DO</button>
-            <button onClick={() => scrollTo('work')} className="hover:text-cyan-400 transition-colors">OUR WORK</button>
-            <button onClick={() => scrollTo('pricing')} className="hover:text-cyan-400 transition-colors">PRICING</button>
-            <button onClick={() => scrollTo('about')} className="hover:text-cyan-400 transition-colors">ABOUT</button>
-          </nav>
+  <!-- SECTION 2: OUR WORK (PORTFOLIO) -->
+  <section id="work" class="py-24 md:py-32 bg-zinc-900">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
+          Real Content. <br class="md:hidden"/>Real Contractors. <br class="md:hidden"/><span class="text-cyan-400">Real Results.</span>
+        </h2>
+        <p class="text-xl text-zinc-400 max-w-2xl mx-auto">
+          Every piece is designed to make your work look as good online as it does in real life.
+        </p>
+      </div>
 
-          <div className="hidden md:block">
-            <button 
-              onClick={() => scrollTo('contact')}
-              className="bg-cyan-400 text-zinc-950 px-6 py-2.5 font-bold uppercase tracking-wide hover:bg-cyan-300 transition-transform hover:scale-105 active:scale-95"
-            >
-              Book a Call
-            </button>
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <!-- Item 1 -->
+        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
+          <img src="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Before/After Roofing" class="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
+              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+            </div>
           </div>
-
-          {/* Mobile Menu Toggle */}
-          <button className="md:hidden text-zinc-50" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">ROOFING</span>
+            <h3 class="text-2xl font-bold uppercase tracking-tight">Before/After Roofing</h3>
+          </div>
         </div>
 
-        {/* Mobile Nav */}
-        {mobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-zinc-900 border-b border-zinc-800 flex flex-col md:hidden py-4 px-6 gap-4 font-bold text-lg">
-            <button onClick={() => scrollTo('services')} className="text-left py-2 hover:text-cyan-400">WHAT WE DO</button>
-            <button onClick={() => scrollTo('work')} className="text-left py-2 hover:text-cyan-400">OUR WORK</button>
-            <button onClick={() => scrollTo('pricing')} className="text-left py-2 hover:text-cyan-400">PRICING</button>
-            <button onClick={() => scrollTo('about')} className="text-left py-2 hover:text-cyan-400">ABOUT</button>
-            <button onClick={() => scrollTo('contact')} className="bg-cyan-400 text-zinc-950 px-6 py-3 mt-2 text-center w-full uppercase tracking-wide">
-              Book a Call
-            </button>
+        <!-- Item 2 -->
+        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
+          <img src="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="HVAC Install Walkthrough" class="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
+              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+            </div>
           </div>
-        )}
-      </header>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">HVAC</span>
+            <h3 class="text-2xl font-bold uppercase tracking-tight">HVAC Install Walkthrough</h3>
+          </div>
+        </div>
 
-      {/* HERO SECTION */}
-      <section id="hero" className="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 flex flex-col items-center text-center overflow-hidden">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0 pointer-events-none bg-zinc-950">
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover opacity-40"
-          >
+        <!-- Item 3: Your Pool Video -->
+        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
+          <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700">
             <source src="SCPOOLS3.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/80 to-zinc-950"></div>
-        </div>
-
-        {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-        
-        <div className="max-w-5xl mx-auto relative z-10">
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter uppercase leading-[0.9] mb-8">
-            Turn Your <span className="text-cyan-400">Job Sites</span><br />
-            Into High-Quality<br />
-            Content That Sells.
-          </h1>
-          <p className="text-lg md:text-2xl text-zinc-400 max-w-3xl mx-auto font-light leading-relaxed mb-10">
-            We film, edit, and create scroll-stopping videos & graphics for roofers, HVAC companies, and contractors—so you can focus on the work while we bring in the attention.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button 
-              onClick={() => scrollTo('contact')}
-              className="w-full sm:w-auto bg-cyan-400 text-zinc-950 px-8 py-4 font-extrabold text-lg uppercase tracking-wider hover:bg-cyan-300 transition-all hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.3)]"
-            >
-              Book a Free Strategy Call
-            </button>
-            <button 
-              onClick={() => scrollTo('work')}
-              className="w-full sm:w-auto bg-transparent border-2 border-zinc-700 text-zinc-300 px-8 py-4 font-bold text-lg uppercase tracking-wider hover:border-zinc-50 hover:text-zinc-50 transition-all flex items-center justify-center gap-2"
-            >
-              See Our Work <ArrowRight size={20} />
-            </button>
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
+              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">CONTRACTING</span>
+            <h3 class="text-2xl font-bold uppercase tracking-tight">Pool Build Transformation</h3>
           </div>
         </div>
-      </section>
 
-      {/* SOCIAL PROOF / TRUST STRIP */}
-      <div className="border-y border-zinc-800 bg-zinc-900/50 py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-8 md:gap-16 text-zinc-400 font-bold uppercase tracking-widest text-sm md:text-base text-center">
-          <div className="flex items-center gap-3">
-            <ShieldCheck className="text-cyan-400" /> Trusted by Local Contractors
+        <!-- Item 4 -->
+        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Customer Testimonial" class="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
+              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Zap className="text-cyan-400" /> Fast Turnaround
-          </div>
-          <div className="flex items-center gap-3">
-            <Video className="text-cyan-400" /> Done-for-You System
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">SOCIAL PROOF</span>
+            <h3 class="text-2xl font-bold uppercase tracking-tight">Customer Testimonial</h3>
           </div>
         </div>
       </div>
 
-      {/* SECTION 1: WHAT WE DO */}
-      <section id="services" className="py-24 md:py-40 px-6 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-6 leading-none">
-              We Turn Everyday Work Into <br/><span className="text-zinc-500">Content That Sells.</span>
-            </h2>
-            <p className="text-lg text-zinc-400 mb-6 leading-relaxed">
-              You're already doing the hard work—installing roofs, fixing systems, building projects. We capture that and turn it into high-performing content that builds trust, attracts leads, and positions you as the go-to in your area.
-            </p>
-            <p className="text-lg text-zinc-400 mb-8 leading-relaxed font-bold">
-              No gimmicks. No trends that don't convert. Just clean, professional content that makes people choose you.
-            </p>
-            
-            <ul className="space-y-4 mb-10">
-              {[
-                "On-site filming (we come to you)",
-                "High-quality video editing",
-                "Short-form content for Instagram, TikTok, Facebook",
-                "Branded graphics & visuals",
-                "Content strategy tailored to your business"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-lg font-medium">
-                  <CheckCircle2 className="text-cyan-400 shrink-0 mt-1" size={24} />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <button 
-              onClick={() => scrollTo('work')}
-              className="text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2 hover:gap-4 transition-all group"
-            >
-              See Examples <ChevronRight className="group-hover:text-white transition-colors" />
-            </button>
-          </div>
-          
-          <div className="relative">
-            {/* Abstract visual representation of video production */}
-            <div className="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative border border-zinc-800">
-              <img 
-                src="https://images.unsplash.com/photo-1542385151-efd9000785a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                alt="Videographer filming contractor" 
-                className="w-full h-full object-cover opacity-60"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
-              
-              {/* Floating UI Elements */}
-              <div className="absolute bottom-8 left-8 right-8 bg-zinc-950/80 backdrop-blur border border-zinc-800 p-6 rounded text-sm font-mono">
-                <div className="flex justify-between items-center mb-4 border-b border-zinc-800 pb-2">
-                  <span className="text-cyan-400">REC.</span>
-                  <span className="text-red-500 animate-pulse">● 00:14:32</span>
-                </div>
-                <div className="space-y-2 text-zinc-400">
-                  <div className="flex justify-between"><span>LENS</span> <span className="text-zinc-50">24MM f/1.4</span></div>
-                  <div className="flex justify-between"><span>ISO</span> <span className="text-zinc-50">800</span></div>
-                  <div className="flex justify-between"><span>LUT</span> <span className="text-cyan-400">CINEMATIC_01</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2: OUR WORK (PORTFOLIO) */}
-      <section id="work" className="py-24 md:py-32 bg-zinc-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
-              Real Content. <br className="md:hidden"/>Real Contractors. <br className="md:hidden"/><span className="text-cyan-400">Real Results.</span>
-            </h2>
-            <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-              Every piece is designed to make your work look as good online as it does in real life.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            {[
-              { title: "Before/After Roofing", tag: "ROOFING", img: "https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-              { title: "HVAC Install Walkthrough", tag: "HVAC", img: "https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-              { title: "Pool Build Transformation", tag: "CONTRACTING", video: "SCPOOLS3.mp4" },
-              { title: "Customer Testimonial", tag: "SOCIAL PROOF", img: "https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
-            ].map((item, i) => (
-              <div key={i} className="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
-                {item.video ? (
-                  <video 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
-                  >
-                    <source src={item.video} type="video/mp4" />
-                  </video>
-                ) : (
-                  <img 
-                    src={item.img} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-                
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-                  <div className="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
-                    <Play className="text-cyan-400 ml-1" size={32} fill="currentColor" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">{item.tag}</span>
-                  <h3 className="text-2xl font-bold uppercase tracking-tight">{item.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <button className="bg-zinc-800 text-zinc-50 px-8 py-4 font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors border border-zinc-700">
-              Watch More Content
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3: PRICING */}
-      <section id="pricing" className="py-24 md:py-40 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
-            Simple Pricing. <br/><span className="text-zinc-500">No Guesswork.</span>
-          </h2>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8 items-center">
-          {/* Starter */}
-          <div className="border border-zinc-800 bg-zinc-900/30 p-8 rounded relative">
-            <h3 className="text-2xl font-extrabold uppercase mb-2">Starter</h3>
-            <div className="text-4xl font-black mb-4">$500<span className="text-lg text-zinc-500 font-medium">/mo</span></div>
-            <div className="h-1 w-12 bg-zinc-700 mb-8"></div>
-            <ul className="space-y-4 mb-10 text-zinc-300 font-medium">
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> 1 filming session</li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> 3 edited videos</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-zinc-600 shrink-0 mt-1" size={20}/> <span>25 pictures + 3 graphics</span></li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> Turnaround: 5–7 days</li>
-            </ul>
-          </div>
-
-          {/* Growth - Most Popular */}
-          <div className="border-2 border-cyan-400 bg-zinc-900 p-10 rounded relative transform lg:-translate-y-4 shadow-[0_0_50px_rgba(34,211,238,0.1)]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cyan-400 text-zinc-950 font-bold uppercase tracking-widest text-xs px-4 py-1.5 rounded-full">
-              Most Popular
-            </div>
-            <h3 className="text-3xl font-extrabold uppercase mb-2 text-cyan-400">Growth</h3>
-            <div className="text-5xl font-black mb-4 text-zinc-50">$750<span className="text-xl text-zinc-400 font-medium">/mo</span></div>
-            <div className="h-1 w-12 bg-cyan-400 mb-8"></div>
-            <ul className="space-y-4 mb-10 text-zinc-100 font-medium text-lg">
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-cyan-400" size={24}/> 2 filming sessions</li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-cyan-400" size={24}/> 5 edited videos</li>
-              <li className="flex items-start gap-3"><CheckCircle2 className="text-cyan-400 shrink-0 mt-1" size={24}/> <span>50+ pictures + 5 graphics</span></li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-cyan-400" size={24}/> Priority turnaround</li>
-            </ul>
-          </div>
-
-          {/* Dominate */}
-          <div className="border border-zinc-800 bg-zinc-900/30 p-8 rounded relative">
-            <h3 className="text-2xl font-extrabold uppercase mb-2">Dominate</h3>
-            <div className="text-4xl font-black mb-4">$1,250<span className="text-lg text-zinc-500 font-medium">/mo</span></div>
-            <div className="h-1 w-12 bg-zinc-700 mb-8"></div>
-            <ul className="space-y-4 mb-10 text-zinc-300 font-medium">
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> 4 film days</li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> 8 edited videos</li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> 100+ graphics</li>
-              <li className="flex items-center gap-3"><CheckCircle2 className="text-zinc-600" size={20}/> Fastest turnaround</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-zinc-500 italic mb-8">Note: Custom packages available depending on your goals.</p>
-          <button 
-            onClick={() => scrollTo('contact')}
-            className="bg-cyan-400 text-zinc-950 px-10 py-5 font-extrabold text-lg uppercase tracking-wider hover:bg-cyan-300 transition-transform hover:scale-105"
-          >
-            Book a Call to Get Pricing
-          </button>
-        </div>
-      </section>
-
-      {/* SECTION 4: ABOUT ME */}
-      <section id="about" className="py-24 md:py-32 bg-zinc-900 border-y border-zinc-800">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-          <div className="relative aspect-square md:aspect-[3/4] overflow-hidden rounded filter grayscale hover:grayscale-0 transition-all duration-700">
-            <img 
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-              alt="Founder with camera" 
-              className="w-full h-full object-cover"
-            />
-            {/* Accent frame */}
-            <div className="absolute inset-0 border-4 border-transparent hover:border-cyan-400 transition-colors duration-500"></div>
-          </div>
-          
-          <div>
-            <h2 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-8">
-              Hey, I'm <span className="text-cyan-400">[Name]</span>
-            </h2>
-            <div className="space-y-6 text-xl text-zinc-300 font-light leading-relaxed">
-              <p>
-                I started this because I saw too many skilled contractors missing out on work simply because they didn't show what they could do online.
-              </p>
-              <p>
-                You don't need to become a content creator—you just need the right person capturing and presenting your work the right way.
-              </p>
-              <p className="font-bold text-white text-2xl py-4">
-                That's where I come in.
-              </p>
-              <p>
-                I work directly with you, keep things simple, and focus on one thing: <span className="text-cyan-400 font-medium">making your business look as good online as it actually is in real life.</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: HOW IT WORKS */}
-      <section className="py-24 md:py-40 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
-            Simple Process. <br/><span className="text-zinc-500">No Headaches.</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-          {/* Connection Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-zinc-800 -z-10"></div>
-
-          {[
-            { step: "01", title: "Book A Call", desc: "We discuss your goals and current bottleneck." },
-            { step: "02", title: "We Plan", desc: "I create a custom content strategy tailored to you." },
-            { step: "03", title: "We Film", desc: "I come on-site and capture you in your element." },
-            { step: "04", title: "You Post", desc: "You get high-quality content ready to bring in jobs." }
-          ].map((item, i) => (
-            <div key={i} className="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
-              <div className="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">
-                {item.step}
-              </div>
-              <h3 className="text-2xl font-bold uppercase mb-4 relative z-10">{item.title}</h3>
-              <p className="text-zinc-400 relative z-10">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FINAL CTA SECTION */}
-      <section id="contact" className="py-32 px-6 bg-cyan-400 text-zinc-950 text-center relative overflow-hidden">
-        {/* Background texture pattern */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '30px 30px' }}></div>
-        
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter mb-6 leading-none">
-            Let's Turn Your Work Into Your Best Marketing Asset
-          </h2>
-          <p className="text-xl md:text-2xl font-medium mb-12 max-w-2xl mx-auto">
-            If you're already doing great work, this is the easiest way to get more of it.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto bg-zinc-950 text-cyan-400 px-10 py-5 font-extrabold text-xl uppercase tracking-wider hover:bg-zinc-800 transition-all hover:scale-105 shadow-2xl">
-              Book Your Free Call
-            </button>
-            <button 
-              onClick={() => scrollTo('work')}
-              className="w-full sm:w-auto bg-transparent border-4 border-zinc-950 text-zinc-950 px-10 py-4 font-extrabold text-xl uppercase tracking-wider hover:bg-zinc-950 hover:text-cyan-400 transition-all"
-            >
-              View Work First
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="bg-zinc-950 py-12 px-6 border-t border-zinc-900">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
-            <div className="w-6 h-6 bg-cyan-400 rounded-sm flex items-center justify-center text-zinc-950">
-              <Video size={14} weight="fill" />
-            </div>
-            CREATIVE<span className="text-cyan-400">CO.</span>
-          </div>
-          
-          <div className="flex gap-6">
-            <a href="#" className="text-zinc-500 hover:text-cyan-400 transition-colors"><Instagram size={24} /></a>
-            <a href="#" className="text-zinc-500 hover:text-cyan-400 transition-colors"><Mail size={24} /></a>
-          </div>
-          
-          <div className="text-zinc-600 text-sm font-medium">
-            © {new Date().getFullYear()} Creative Co. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <div class="text-center">
+        <button class="bg-zinc-800 text-zinc-50 px-8 py-4 font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors border border-zinc-700">
+          Watch More Content
+        </button>
+      </div>
     </div>
-  );
-};
+  </section>
 
-export default App;
+  <!-- SECTION 3: PRICING -->
+  <section id="pricing" class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
+        Simple Pricing. <br/><span class="text-zinc-500">No Guesswork.</span>
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 items-center">
+      <!-- Starter -->
+      <div class="border border-zinc-800 bg-zinc-900/30 p-8 rounded relative">
+        <h3 class="text-2xl font-extrabold uppercase mb-2">Starter</h3>
+        <div class="text-4xl font-black mb-4">$500<span class="text-lg text-zinc-500 font-medium">/mo</span></div>
+        <div class="h-1 w-12 bg-zinc-700 mb-8"></div>
+        <ul class="space-y-4 mb-10 text-zinc-300 font-medium">
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 1 filming session</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 3 edited videos</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 shrink-0 mt-1 w-5 h-5"></i> <span>25 pictures + 3 graphics</span></li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> Turnaround: 5–7 days</li>
+        </ul>
+      </div>
+
+      <!-- Growth -->
+      <div class="border-2 border-cyan-400 bg-zinc-900 p-10 rounded relative transform lg:-translate-y-4 shadow-[0_0_50px_rgba(34,211,238,0.1)]">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cyan-400 text-zinc-950 font-bold uppercase tracking-widest text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
+          Most Popular
+        </div>
+        <h3 class="text-3xl font-extrabold uppercase mb-2 text-cyan-400">Growth</h3>
+        <div class="text-5xl font-black mb-4 text-zinc-50">$750<span class="text-xl text-zinc-400 font-medium">/mo</span></div>
+        <div class="h-1 w-12 bg-cyan-400 mb-8"></div>
+        <ul class="space-y-4 mb-10 text-zinc-100 font-medium text-lg">
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 w-6 h-6"></i> 2 filming sessions</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 w-6 h-6"></i> 5 edited videos</li>
+          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i> <span>50+ pictures + 5 graphics</span></li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 w-6 h-6"></i> Priority turnaround</li>
+        </ul>
+      </div>
+
+      <!-- Dominate -->
+      <div class="border border-zinc-800 bg-zinc-900/30 p-8 rounded relative">
+        <h3 class="text-2xl font-extrabold uppercase mb-2">Dominate</h3>
+        <div class="text-4xl font-black mb-4">$1,250<span class="text-lg text-zinc-500 font-medium">/mo</span></div>
+        <div class="h-1 w-12 bg-zinc-700 mb-8"></div>
+        <ul class="space-y-4 mb-10 text-zinc-300 font-medium">
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 4 film days</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 8 edited videos</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 100+ graphics</li>
+          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> Fastest turnaround</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-zinc-500 italic mb-8">Note: Custom packages available depending on your goals.</p>
+      <a href="#contact" class="scroll-link inline-block bg-cyan-400 text-zinc-950 px-10 py-5 font-extrabold text-lg uppercase tracking-wider hover:bg-cyan-300 transition-transform hover:scale-105">
+        Book a Call to Get Pricing
+      </a>
+    </div>
+  </section>
+
+  <!-- SECTION 4: ABOUT ME -->
+  <section id="about" class="py-24 md:py-32 bg-zinc-900 border-y border-zinc-800">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <div class="relative aspect-square md:aspect-[3/4] overflow-hidden rounded filter grayscale hover:grayscale-0 transition-all duration-700">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Founder with camera" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 border-4 border-transparent hover:border-cyan-400 transition-colors duration-500"></div>
+      </div>
+      
+      <div>
+        <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-8">
+          Hey, I'm <span class="text-cyan-400">[Name]</span>
+        </h2>
+        <div class="space-y-6 text-xl text-zinc-300 font-light leading-relaxed">
+          <p>I started this because I saw too many skilled contractors missing out on work simply because they didn't show what they could do online.</p>
+          <p>You don't need to become a content creator—you just need the right person capturing and presenting your work the right way.</p>
+          <p class="font-bold text-white text-2xl py-4">That's where I come in.</p>
+          <p>I work directly with you, keep things simple, and focus on one thing: <span class="text-cyan-400 font-medium">making your business look as good online as it actually is in real life.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: HOW IT WORKS -->
+  <section class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
+        Simple Process. <br/><span class="text-zinc-500">No Headaches.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+      <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-zinc-800 -z-10"></div>
+
+      <!-- Step 1 -->
+      <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
+        <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">01</div>
+        <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">Book A Call</h3>
+        <p class="text-zinc-400 relative z-10">We discuss your goals and current bottleneck.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
+        <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">02</div>
+        <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">We Plan</h3>
+        <p class="text-zinc-400 relative z-10">I create a custom content strategy tailored to you.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
+        <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">03</div>
+        <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">We Film</h3>
+        <p class="text-zinc-400 relative z-10">I come on-site and capture you in your element.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
+        <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">04</div>
+        <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">You Post</h3>
+        <p class="text-zinc-400 relative z-10">You get high-quality content ready to bring in jobs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA SECTION -->
+  <section id="contact" class="py-32 px-6 bg-cyan-400 text-zinc-950 text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 30px 30px;"></div>
+    
+    <div class="max-w-4xl mx-auto relative z-10">
+      <h2 class="text-5xl md:text-7xl font-extrabold uppercase tracking-tighter mb-6 leading-none">
+        Let's Turn Your Work Into Your Best Marketing Asset
+      </h2>
+      <p class="text-xl md:text-2xl font-medium mb-12 max-w-2xl mx-auto">
+        If you're already doing great work, this is the easiest way to get more of it.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button class="w-full sm:w-auto bg-zinc-950 text-cyan-400 px-10 py-5 font-extrabold text-xl uppercase tracking-wider hover:bg-zinc-800 transition-all hover:scale-105 shadow-2xl">
+          Book Your Free Call
+        </button>
+        <a href="#work" class="scroll-link w-full sm:w-auto bg-transparent border-4 border-zinc-950 text-zinc-950 px-10 py-4 font-extrabold text-xl uppercase tracking-wider hover:bg-zinc-950 hover:text-cyan-400 transition-all inline-block">
+          View Work First
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-zinc-950 py-12 px-6 border-t border-zinc-900">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
+        <div class="w-6 h-6 bg-cyan-400 rounded-sm flex items-center justify-center text-zinc-950">
+          <i data-lucide="video" class="w-4 h-4 fill-current"></i>
+        </div>
+        CREATIVE<span class="text-cyan-400">CO.</span>
+      </div>
+      
+      <div class="flex gap-6">
+        <a href="#" class="text-zinc-500 hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+        <a href="#" class="text-zinc-500 hover:text-cyan-400 transition-colors"><i data-lucide="mail" class="w-6 h-6"></i></a>
+      </div>
+      
+      <div class="text-zinc-600 text-sm font-medium">
+        © <span id="year"></span> Creative Co. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript for interactivity -->
+  <script>
+    // Initialize icons
+    lucide.createIcons();
+    
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sticky Header Logic
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('bg-zinc-950/90', 'backdrop-blur-md', 'border-zinc-800', 'py-4');
+        header.classList.remove('bg-transparent', 'border-transparent', 'py-6');
+      } else {
+        header.classList.remove('bg-zinc-950/90', 'backdrop-blur-md', 'border-zinc-800', 'py-4');
+        header.classList.add('bg-transparent', 'border-transparent', 'py-6');
+      }
+    });
+
+    // Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+      
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+      } else {
+        mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+      }
+      lucide.createIcons();
+    });
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.scroll-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.classList.remove('flex');
+          mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+          lucide.createIcons();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
