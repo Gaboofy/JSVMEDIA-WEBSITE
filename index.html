@@ -220,94 +220,60 @@
         </p>
       </div>
 
-      <!-- Video Grid Container (5 columns on large screens) -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 pb-12">
+      <!-- Video Grid Container (3 large columns) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto pb-12">
         
         <!-- Item 1: Your Vertical Pool Video -->
-        <div class="video-card group cursor-pointer flex flex-col">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+        <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
             <!-- Added poster attribute for thumbnail -->
-            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1422&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <!-- Central Play Button -->
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
-              <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-5 h-5 md:w-6 md:h-6 fill-zinc-950"></i>
+              <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
               </div>
             </div>
           </div>
           <div>
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-1 md:mb-2 block uppercase">Contracting</span>
-            <h3 class="text-sm md:text-lg font-bold uppercase tracking-tight leading-tight">Pool Build Transformation</h3>
+            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Contracting</span>
+            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Pool Build Transformation</h3>
           </div>
         </div>
 
         <!-- Item 2 -->
-        <div class="video-card group cursor-pointer flex flex-col">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+        <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
             <!-- Using SCPOOLS3 as a placeholder for the others for now -->
-            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1422&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
-              <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-5 h-5 md:w-6 md:h-6 fill-zinc-950"></i>
+              <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
               </div>
             </div>
           </div>
           <div>
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-1 md:mb-2 block uppercase">Roofing</span>
-            <h3 class="text-sm md:text-lg font-bold uppercase tracking-tight leading-tight">Before/After Roofing</h3>
+            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Roofing</span>
+            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Before/After Roofing</h3>
           </div>
         </div>
 
         <!-- Item 3 -->
-        <div class="video-card group cursor-pointer flex flex-col">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
-            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+        <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
+            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1422&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
-              <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-5 h-5 md:w-6 md:h-6 fill-zinc-950"></i>
+              <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
               </div>
             </div>
           </div>
           <div>
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-1 md:mb-2 block uppercase">HVAC</span>
-            <h3 class="text-sm md:text-lg font-bold uppercase tracking-tight leading-tight">HVAC Install Walkthrough</h3>
-          </div>
-        </div>
-
-        <!-- Item 4 -->
-        <div class="video-card group cursor-pointer flex flex-col">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
-            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
-            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
-              <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-5 h-5 md:w-6 md:h-6 fill-zinc-950"></i>
-              </div>
-            </div>
-          </div>
-          <div>
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-1 md:mb-2 block uppercase">Behind the Scenes</span>
-            <h3 class="text-sm md:text-lg font-bold uppercase tracking-tight leading-tight">Job Site Walkthroughs</h3>
-          </div>
-        </div>
-
-        <!-- Item 5 -->
-        <div class="video-card group cursor-pointer flex flex-col">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
-            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
-            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
-              <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-5 h-5 md:w-6 md:h-6 fill-zinc-950"></i>
-              </div>
-            </div>
-          </div>
-          <div>
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-1 md:mb-2 block uppercase">Social Proof</span>
-            <h3 class="text-sm md:text-lg font-bold uppercase tracking-tight leading-tight">Customer Testimonials</h3>
+            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">HVAC</span>
+            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">HVAC Install Walkthrough</h3>
           </div>
         </div>
       </div>
