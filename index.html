@@ -44,6 +44,15 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    
+    /* Hide scrollbar for horizontal carousel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
   </style>
 </head>
 <body class="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-cyan-400 selection:text-zinc-950">
@@ -200,7 +209,7 @@
   </section>
 
   <!-- SECTION 2: OUR WORK (PORTFOLIO) -->
-  <section id="work" class="py-24 md:py-32 bg-zinc-900">
+  <section id="work" class="py-24 md:py-32 bg-zinc-900 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
@@ -211,69 +220,98 @@
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 mb-12">
-        <!-- Item 1 -->
-        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
-          <img src="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Before/After Roofing" class="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
-          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
-              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+      <!-- Carousel Container -->
+      <div class="flex overflow-x-auto gap-6 pb-12 no-scrollbar snap-x snap-mandatory -mx-6 px-6 md:mx-0 md:px-0 scroll-pl-6 md:scroll-pl-0">
+        
+        <!-- Item 1: Your Vertical Pool Video -->
+        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+            <video src="./SCPOOLS3.mp4" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+            <!-- Central Play Button -->
+            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+              <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
+              </div>
             </div>
           </div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">ROOFING</span>
-            <h3 class="text-2xl font-bold uppercase tracking-tight">Before/After Roofing</h3>
+          <div>
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Contracting</span>
+            <h3 class="text-xl font-bold uppercase tracking-tight leading-tight">Pool Build Transformation</h3>
           </div>
         </div>
 
         <!-- Item 2 -->
-        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
-          <img src="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="HVAC Install Walkthrough" class="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
-          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
-              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+            <img src="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="Before/After Roofing" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+              <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
+              </div>
             </div>
           </div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">HVAC</span>
-            <h3 class="text-2xl font-bold uppercase tracking-tight">HVAC Install Walkthrough</h3>
+          <div>
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Roofing</span>
+            <h3 class="text-xl font-bold uppercase tracking-tight leading-tight">Before/After Roofing</h3>
           </div>
         </div>
 
-        <!-- Item 3: Your Pool Video -->
-        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
-          <video src="./SCPOOLS3.mp4" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"></video>
-          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
-              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+        <!-- Item 3 -->
+        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="HVAC Install Walkthrough" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+              <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
+              </div>
             </div>
           </div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">CONTRACTING</span>
-            <h3 class="text-2xl font-bold uppercase tracking-tight">Pool Build Transformation</h3>
+          <div>
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block uppercase">HVAC</span>
+            <h3 class="text-xl font-bold uppercase tracking-tight leading-tight">HVAC Install Walkthrough</h3>
           </div>
         </div>
 
         <!-- Item 4 -->
-        <div class="group relative aspect-video bg-zinc-950 overflow-hidden rounded cursor-pointer border border-zinc-800 hover:border-cyan-400 transition-colors">
-          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Customer Testimonial" class="w-full h-full object-cover opacity-50 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />
-          <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
-          <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-            <div class="w-20 h-20 rounded-full bg-cyan-400/20 backdrop-blur-sm flex items-center justify-center border border-cyan-400/50">
-              <i data-lucide="play" class="text-cyan-400 ml-1 w-8 h-8 fill-cyan-400"></i>
+        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="Behind the Scenes" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+              <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
+              </div>
             </div>
           </div>
-          <div class="absolute bottom-6 left-6 right-6">
-            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block">SOCIAL PROOF</span>
-            <h3 class="text-2xl font-bold uppercase tracking-tight">Customer Testimonial</h3>
+          <div>
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Behind the Scenes</span>
+            <h3 class="text-xl font-bold uppercase tracking-tight leading-tight">Job Site Walkthroughs</h3>
           </div>
         </div>
+
+        <!-- Item 5 -->
+        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="Customer Testimonial" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
+            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+              <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
+                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span class="text-xs font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Social Proof</span>
+            <h3 class="text-xl font-bold uppercase tracking-tight leading-tight">Customer Testimonials</h3>
+          </div>
+        </div>
+
       </div>
 
-      <div class="text-center">
+      <div class="text-center mt-4">
         <button class="bg-zinc-800 text-zinc-50 px-8 py-4 font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors border border-zinc-700">
           Watch More Content
         </button>
