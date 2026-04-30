@@ -1,35 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="70 20 460 170" width="100%" height="100%">
   <style>
     .jsv-text {
       font-family: 'Arial Black', 'Impact', sans-serif;
-      font-size: 110px;
+      font-size: 140px;
       font-weight: 900;
       letter-spacing: -2px;
     }
     .media-text {
       font-family: 'Arial', sans-serif;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 600;
-      letter-spacing: 24px;
+      letter-spacing: 32px;
     }
   </style>
   
   <!-- JSV Letters -->
-  <text x="300" y="110" class="jsv-text" text-anchor="middle">
+  <text x="300" y="140" class="jsv-text" text-anchor="middle">
     <tspan fill="#ffffff">J</tspan>
     <tspan fill="#22d3ee">S</tspan>
     <tspan fill="#ffffff">V</tspan>
   </text>
   
   <!-- Bottom MEDIA Section & Lines -->
-  <g transform="translate(0, 145)">
+  <g transform="translate(0, 175)">
     <!-- Left Line -->
-    <line x1="140" y1="0" x2="210" y2="0" stroke="#22d3ee" stroke-width="2" />
+    <line x1="80" y1="0" x2="180" y2="0" stroke="#22d3ee" stroke-width="3" />
     
     <!-- MEDIA Text (Offset slightly to account for the heavy letter-spacing) -->
-    <text x="312" y="7" class="media-text" fill="#ffffff" text-anchor="middle">MEDIA</text>
+    <text x="316" y="8" class="media-text" fill="#ffffff" text-anchor="middle">MEDIA</text>
     
     <!-- Right Line -->
-    <line x1="390" y1="0" x2="460" y2="0" stroke="#22d3ee" stroke-width="2" />
+    <line x1="420" y1="0" x2="520" y2="0" stroke="#22d3ee" stroke-width="3" />
   </g>
 </svg>
