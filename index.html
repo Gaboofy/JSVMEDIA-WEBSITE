@@ -224,12 +224,13 @@
       <div class="flex overflow-x-auto gap-6 pb-12 no-scrollbar snap-x snap-mandatory -mx-6 px-6 md:mx-0 md:px-0 scroll-pl-6 md:scroll-pl-0">
         
         <!-- Item 1: Your Vertical Pool Video -->
-        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+        <div class="video-card snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
-            <video src="./SCPOOLS3.mp4" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
-            <!-- Central Play Button -->
-            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+            <!-- Removed autoplay so it waits for click, added JS logic below -->
+            <video src="./SCPOOLS3.mp4" muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <!-- Central Play Button (Fades out when playing) -->
+            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
               </div>
@@ -242,11 +243,11 @@
         </div>
 
         <!-- Item 2 -->
-        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+        <div class="video-card snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
             <img src="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="Before/After Roofing" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
-            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
               </div>
@@ -259,11 +260,11 @@
         </div>
 
         <!-- Item 3 -->
-        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+        <div class="video-card snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
             <img src="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="HVAC Install Walkthrough" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
-            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
               </div>
@@ -276,11 +277,11 @@
         </div>
 
         <!-- Item 4 -->
-        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+        <div class="video-card snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
             <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="Behind the Scenes" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
-            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
               </div>
@@ -293,11 +294,11 @@
         </div>
 
         <!-- Item 5 -->
-        <div class="snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
+        <div class="video-card snap-start shrink-0 w-[280px] sm:w-[320px] group cursor-pointer flex flex-col">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-5">
             <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=1066&q=80" alt="Customer Testimonial" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500"></div>
-            <div class="absolute inset-0 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 fill-zinc-950"></i>
               </div>
@@ -309,6 +310,8 @@
           </div>
         </div>
 
+        <!-- Spacer element to fix the browser cut-off bug at the end of the scroll -->
+        <div class="snap-end shrink-0 w-4 md:w-8"></div>
       </div>
 
       <div class="text-center mt-4">
@@ -493,6 +496,33 @@
     
     // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Portfolio Video Play/Pause & Button Fade Logic
+    document.querySelectorAll('.video-card').forEach(card => {
+      const video = card.querySelector('video');
+      const playOverlay = card.querySelector('.play-overlay');
+
+      if (video) {
+        // Hide play button automatically if the video enters the 'playing' state
+        video.addEventListener('play', () => {
+          if (playOverlay) playOverlay.style.opacity = '0';
+        });
+
+        // Bring back the play button when paused
+        video.addEventListener('pause', () => {
+          if (playOverlay) playOverlay.style.opacity = '1';
+        });
+
+        // Click to play/pause
+        card.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      }
+    });
 
     // Sticky Header Logic
     const header = document.getElementById('header');
