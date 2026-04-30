@@ -60,11 +60,9 @@
   <!-- STICKY NAVIGATION -->
   <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-6">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-      <a href="#hero" class="text-2xl font-extrabold tracking-tighter cursor-pointer flex items-center gap-2 scroll-link">
-        <div class="w-8 h-8 bg-cyan-400 rounded-sm flex items-center justify-center text-zinc-950">
-          <i data-lucide="video" class="w-5 h-5 fill-current"></i>
-        </div>
-        CREATIVE<span class="text-cyan-400">CO.</span>
+      <a href="#hero" class="cursor-pointer flex items-center scroll-link">
+        <!-- REPLACE this src with your actual logo filename -->
+        <img src="./your-logo-filename.png" alt="Company Logo" class="h-8 md:h-10 w-auto" />
       </a>
 
       <!-- Desktop Nav -->
@@ -189,7 +187,7 @@
       
       <div class="relative">
         <div class="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative border border-zinc-800">
-          <img src="camera2.jpg" alt="Videographer filming contractor" class="w-full h-full object-cover opacity-60" />
+          <img src="https://images.unsplash.com/photo-1542385151-efd9000785a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Videographer filming contractor" class="w-full h-full object-cover opacity-60" />
           <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
           
           <div class="absolute bottom-8 left-8 right-8 bg-zinc-950/80 backdrop-blur border border-zinc-800 p-6 rounded text-sm font-mono">
@@ -227,7 +225,7 @@
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
             <!-- Added poster attribute for thumbnail -->
-            <video src="./SCPOOLS3.mp4" poster="IMG_4679.PNG" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1422&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <!-- Central Play Button -->
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
@@ -246,7 +244,7 @@
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
             <!-- Using SCPOOLS3 as a placeholder for the others for now -->
-            <video src="./LADY R.mp4" poster="./ladyr.jpg" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1632759145355-6d5da722c1eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1422&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
@@ -263,7 +261,7 @@
         <!-- Item 3 -->
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
-            <video src="./Timeline 1.mp4" poster="tt.png" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <video src="./SCPOOLS3.mp4" poster="https://images.unsplash.com/photo-1581094288338-2314dddb31b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=1422&q=80" muted loop playsinline preload="none" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
@@ -350,13 +348,13 @@
   <section id="about" class="py-24 md:py-32 bg-zinc-900 border-y border-zinc-800">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
       <div class="relative aspect-square md:aspect-[3/4] overflow-hidden rounded filter grayscale hover:grayscale-0 transition-all duration-700">
-        <img src="./seb.JPG" alt="Founder with camera" class="w-full h-full object-cover" />
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Founder with camera" class="w-full h-full object-cover" />
         <div class="absolute inset-0 border-4 border-transparent hover:border-cyan-400 transition-colors duration-500"></div>
       </div>
       
       <div>
         <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-8">
-          Hey, I'm <span class="text-cyan-400">Sebastian</span>
+          Hey, I'm <span class="text-cyan-400">[Name]</span>
         </h2>
         <div class="space-y-6 text-xl text-zinc-300 font-light leading-relaxed">
           <p>I started this because I saw too many skilled contractors missing out on work simply because they didn't show what they could do online.</p>
@@ -435,11 +433,9 @@
   <!-- FOOTER -->
   <footer class="bg-zinc-950 py-12 px-6 border-t border-zinc-900">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="text-2xl font-extrabold tracking-tighter flex items-center gap-2">
-        <div class="w-6 h-6 bg-cyan-400 rounded-sm flex items-center justify-center text-zinc-950">
-          <i data-lucide="video" class="w-4 h-4 fill-current"></i>
-        </div>
-        CREATIVE<span class="text-cyan-400">CO.</span>
+      <div class="flex items-center">
+        <!-- REPLACE this src with your actual logo filename -->
+        <img src="./your-logo-filename.png" alt="Company Logo" class="h-6 md:h-8 w-auto" />
       </div>
       
       <div class="flex gap-6">
