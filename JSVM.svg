@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="100%" height="100%">
+  <style>
+    .jsv-text {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 110px;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+    .media-text {
+      font-family: 'Arial', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 24px;
+    }
+  </style>
+  
+  <!-- JSV Letters -->
+  <text x="300" y="110" class="jsv-text" text-anchor="middle">
+    <tspan fill="#ffffff">J</tspan>
+    <tspan fill="#22d3ee">S</tspan>
+    <tspan fill="#ffffff">V</tspan>
+  </text>
+  
+  <!-- Bottom MEDIA Section & Lines -->
+  <g transform="translate(0, 145)">
+    <!-- Left Line -->
+    <line x1="140" y1="0" x2="210" y2="0" stroke="#22d3ee" stroke-width="2" />
+    
+    <!-- MEDIA Text (Offset slightly to account for the heavy letter-spacing) -->
+    <text x="312" y="7" class="media-text" fill="#ffffff" text-anchor="middle">MEDIA</text>
+    
+    <!-- Right Line -->
+    <line x1="390" y1="0" x2="460" y2="0" stroke="#22d3ee" stroke-width="2" />
+  </g>
+</svg>
