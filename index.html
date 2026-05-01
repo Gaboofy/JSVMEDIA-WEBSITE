@@ -268,7 +268,7 @@
           </div>
           <div>
             <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Contracting</span>
-            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Pool Plastering</h3>
+            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Pool Builds</h3>
           </div>
         </div>
 
@@ -284,7 +284,7 @@
             </div>
           </div>
           <div>
-            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Food & Beverage</span>
+            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Restaurant</span>
             <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Restaurant Promo</h3>
           </div>
         </div>
@@ -496,9 +496,8 @@
         <p class="text-zinc-400 font-medium">How Many Jobs Are You Missing Because You're Not Showing Your Work Online?</p>
       </div>
       
-      <!-- Netlify intercept form -->
-      <form id="funnel-form" name="strategy-call-funnel" method="POST" data-netlify="true" class="space-y-6 text-left">
-        <input type="hidden" name="form-name" value="strategy-call-funnel" />
+      <!-- Formspree intercept form -->
+      <form id="funnel-form" action="https://formspree.io/f/xbdwlkzw" method="POST" class="space-y-6 text-left">
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
@@ -586,7 +585,7 @@
       }, 300);
     }
 
-    // Handle Form Submission invisibly, then redirect to Calendly
+    // Handle Form Submission invisibly with Formspree, then redirect
     document.getElementById('funnel-form').addEventListener('submit', function(e) {
       e.preventDefault(); // Stop page from refreshing
       
@@ -596,13 +595,20 @@
 
       const formData = new FormData(this);
       
-      fetch('/', {
+      fetch('https://formspree.io/f/xbdwlkzw', {
         method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
       })
-      .then(() => {
-        window.location.href = 'success.html';
+      .then(response => {
+        if (response.ok) {
+          window.location.href = 'success.html';
+        } else {
+          console.error('Formspree returned an error');
+          window.location.href = 'success.html'; // Fallback redirect just in case
+        }
       })
       .catch((error) => {
         console.error('Submission Error:', error);
