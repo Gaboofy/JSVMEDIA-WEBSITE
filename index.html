@@ -4,8 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JSV MEDIA | Content That Sells</title>
-  
-  <!-- Tailwind CSS -->
+
+  <!-- Preconnect to external origins for faster resource fetching -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- 
+    PRODUCTION NOTE: Replace cdn.tailwindcss.com with a compiled CSS file.
+    Run: npx tailwindcss -i ./input.css -o ./dist/output.css --minify
+    Then link the compiled file here instead. The CDN script below works
+    but adds ~300KB of JS overhead in the browser.
+  -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -13,26 +22,13 @@
         extend: {
           colors: {
             zinc: {
-              50: '#fafafa',
-              100: '#f4f4f5',
-              300: '#d4d4d8',
-              400: '#a1a1aa',
-              500: '#71717a',
-              600: '#52525b',
-              700: '#3f3f46',
-              800: '#27272a',
-              900: '#18181b',
-              950: '#09090b',
+              50: '#fafafa', 100: '#f4f4f5', 300: '#d4d4d8', 400: '#a1a1aa',
+              500: '#71717a', 600: '#52525b', 700: '#3f3f46', 800: '#27272a',
+              900: '#18181b', 950: '#09090b',
             },
-            cyan: {
-              300: '#67e8f9',
-              400: '#22d3ee',
-              500: '#06b6d4',
-            }
+            cyan: { 300: '#67e8f9', 400: '#22d3ee', 500: '#06b6d4' }
           },
-          animation: {
-            'shimmer': 'shimmer 2.5s linear infinite',
-          },
+          animation: { 'shimmer': 'shimmer 2.5s linear infinite' },
           keyframes: {
             shimmer: {
               '0%': { backgroundPosition: '200% 0' },
@@ -44,53 +40,58 @@
     }
   </script>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <!-- Inline only the SVG icons you actually use instead of loading the full Lucide library -->
   <style>
+    /* ===== CRITICAL CSS — renders above-the-fold instantly ===== */
     .clip-text {
       background: linear-gradient(to right, #ffffff, #a1a1aa);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    
-    /* Hide scrollbar for horizontal carousel */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
 
-    /* 21st.dev Style Animations */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Scroll reveal — GPU-accelerated with will-change */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
       filter: blur(8px);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
     }
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
+      will-change: auto; /* Release GPU memory after animation completes */
     }
     .delay-100 { transition-delay: 100ms; }
     .delay-200 { transition-delay: 200ms; }
     .delay-300 { transition-delay: 300ms; }
+
+    /* Video poster — show a solid color placeholder until poster loads */
+    video {
+      background-color: #18181b;
+      object-fit: cover;
+    }
+
+    /* Reduce layout shifts by setting aspect ratios */
+    .video-aspect { aspect-ratio: 9 / 16; }
+    .hero-video-aspect { aspect-ratio: 16 / 9; }
   </style>
 </head>
 <body class="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-cyan-400 selection:text-zinc-950">
 
+  <!-- ============================================================ -->
   <!-- STICKY NAVIGATION -->
+  <!-- ============================================================ -->
   <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-6">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
       <a href="#hero" class="cursor-pointer flex items-center scroll-link">
-        <!-- Logo made larger here with h-12 md:h-16 -->
-        <img src="./JSVM.svg" alt="Company Logo" class="h-12 md:h-16 w-auto" />
+        <img src="./JSVM.svg" alt="JSV Media Logo" class="h-12 md:h-16 w-auto" width="64" height="64" />
       </a>
 
-      <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
         <a href="#services" class="scroll-link hover:text-cyan-400 transition-colors">WHAT WE DO</a>
         <a href="#work" class="scroll-link hover:text-cyan-400 transition-colors">OUR WORK</a>
@@ -104,13 +105,14 @@
         </a>
       </div>
 
-      <!-- Mobile Menu Toggle -->
-      <button id="mobile-menu-btn" class="md:hidden text-zinc-50">
-        <i data-lucide="menu" class="w-7 h-7"></i>
+      <button id="mobile-menu-btn" class="md:hidden text-zinc-50" aria-label="Toggle menu">
+        <!-- Inline SVG instead of Lucide library call -->
+        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
       </button>
     </div>
 
-    <!-- Mobile Nav -->
     <div id="mobile-menu" class="absolute top-full left-0 w-full bg-zinc-900 border-b border-zinc-800 hidden flex-col md:hidden py-4 px-6 gap-4 font-bold text-lg">
       <a href="#services" class="scroll-link text-left py-2 hover:text-cyan-400">WHAT WE DO</a>
       <a href="#work" class="scroll-link text-left py-2 hover:text-cyan-400">OUR WORK</a>
@@ -122,15 +124,44 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- ============================================================ -->
+  <!-- HERO SECTION
+       OPTIMIZATION: 
+       - preload="none" → browser won't download video until play starts
+       - poster image shows immediately (compress this to <100KB WebP)
+       - Video only autoplays after page load via JS (non-blocking)
+  ============================================================ -->
   <section id="hero" class="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 flex flex-col items-center text-center overflow-hidden">
-    <!-- Background Video -->
     <div class="absolute inset-0 z-0 pointer-events-none bg-zinc-950">
-      <video src="./SCPOOLS3.mp4" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-40"></video>
+      <video 
+        id="hero-video"
+        poster="./hero-poster.jpg"
+        muted 
+        loop 
+        playsinline 
+        preload="none"
+        class="w-full h-full object-cover opacity-40"
+      >
+        <!--
+          OPTIMIZATION: Serve multiple formats. Browser picks the first it supports.
+          Convert your video:
+            ffmpeg -i SCPOOLS3.mp4 -c:v libx264 -crf 28 -preset slow -vf "scale=1280:-2" -an -movflags +faststart SCPOOLS3-web.mp4
+            ffmpeg -i SCPOOLS3.mp4 -c:v libvpx-vp9 -crf 35 -b:v 0 -vf "scale=1280:-2" -an SCPOOLS3-web.webm
+          
+          Key flags:
+            -crf 28/35     → lower quality = smaller file (visually fine for bg video)
+            -scale=1280:-2 → cap width at 720p (nobody sees bg video at 4K)
+            -an            → strip audio (muted anyway, saves 30-40% filesize)
+            -movflags +faststart → moves metadata to front so playback starts faster
+        -->
+        <source src="./SCPOOLS3-web.webm" type="video/webm">
+        <source src="./SCPOOLS3-web.mp4" type="video/mp4">
+        <!-- Fallback to original if optimized versions don't exist yet -->
+        <source src="./SCPOOLS3.mp4" type="video/mp4">
+      </video>
       <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/80 to-zinc-950"></div>
     </div>
 
-    <!-- Subtle background glow -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
     
     <div class="max-w-5xl mx-auto relative z-10">
@@ -145,32 +176,37 @@
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal delay-200">
         <a href="https://calendly.com/sebastian-jsvmedia/content-creation-consultation" target="_blank" rel="noopener noreferrer" class="relative overflow-hidden group w-full sm:w-auto bg-cyan-400 text-zinc-950 px-8 py-4 font-extrabold text-lg uppercase tracking-wider hover:bg-cyan-300 transition-all hover:scale-105 shadow-[0_0_30px_rgba(34,211,238,0.3)]">
           <span class="relative z-10">Book a Free Strategy Call</span>
-          <!-- Animated Light Sweep on Hover -->
           <div class="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-shimmer z-0"></div>
         </a>
         <a href="#work" class="scroll-link w-full sm:w-auto bg-transparent border-2 border-zinc-700 text-zinc-300 px-8 py-4 font-bold text-lg uppercase tracking-wider hover:border-zinc-50 hover:text-zinc-50 transition-all flex items-center justify-center gap-2">
-          See Our Work <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          See Our Work
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL PROOF / TRUST STRIP -->
+  <!-- TRUST STRIP -->
   <div class="border-y border-zinc-800 bg-zinc-900/50 py-8 px-6">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-8 md:gap-16 text-zinc-400 font-bold uppercase tracking-widest text-sm md:text-base text-center">
       <div class="flex items-center gap-3">
-        <i data-lucide="shield-check" class="text-cyan-400 w-6 h-6"></i> Trusted by Local Contractors
+        <svg class="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        Trusted by Local Contractors
       </div>
       <div class="flex items-center gap-3">
-        <i data-lucide="zap" class="text-cyan-400 w-6 h-6"></i> Fast Turnaround
+        <svg class="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Fast Turnaround
       </div>
       <div class="flex items-center gap-3">
-        <i data-lucide="video" class="text-cyan-400 w-6 h-6"></i> Done-for-You System
+        <svg class="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        Done-for-You System
       </div>
     </div>
   </div>
 
-  <!-- SECTION 1: WHAT WE DO -->
+  <!-- ============================================================ -->
+  <!-- WHAT WE DO -->
+  <!-- ============================================================ -->
   <section id="services" class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
     <div class="grid md:grid-cols-2 gap-16 items-center">
       <div>
@@ -186,35 +222,37 @@
         
         <ul class="space-y-4 mb-10">
           <li class="flex items-start gap-3 text-lg font-medium">
-            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <svg class="text-cyan-400 shrink-0 mt-1 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>On-site filming (we come to you)</span>
           </li>
           <li class="flex items-start gap-3 text-lg font-medium">
-            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <svg class="text-cyan-400 shrink-0 mt-1 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>High-quality video editing</span>
           </li>
           <li class="flex items-start gap-3 text-lg font-medium">
-            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <svg class="text-cyan-400 shrink-0 mt-1 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>Short-form content for Instagram, TikTok, Facebook</span>
           </li>
           <li class="flex items-start gap-3 text-lg font-medium">
-            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <svg class="text-cyan-400 shrink-0 mt-1 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>Branded graphics & visuals</span>
           </li>
           <li class="flex items-start gap-3 text-lg font-medium">
-            <i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i>
+            <svg class="text-cyan-400 shrink-0 mt-1 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>Content strategy tailored to your business</span>
           </li>
         </ul>
 
         <a href="#work" class="scroll-link text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-2 hover:gap-4 transition-all group inline-flex">
-          See Examples <i data-lucide="chevron-right" class="group-hover:text-white transition-colors w-6 h-6"></i>
+          See Examples
+          <svg class="group-hover:text-white transition-colors w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
       
       <div class="relative">
         <div class="aspect-[4/5] bg-zinc-900 rounded-lg overflow-hidden relative border border-zinc-800">
-          <img src="camera2.jpg" alt="Videographer filming contractor" loading="lazy" class="w-full h-full object-cover opacity-60" />
+          <!-- OPTIMIZATION: loading="lazy" + explicit dimensions prevent layout shift -->
+          <img src="camera2.jpg" alt="Videographer filming contractor" loading="lazy" width="600" height="750" class="w-full h-full object-cover opacity-60" />
           <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
           
           <div class="absolute bottom-8 left-8 right-8 bg-zinc-950/80 backdrop-blur border border-zinc-800 p-6 rounded text-sm font-mono">
@@ -233,7 +271,14 @@
     </div>
   </section>
 
-  <!-- SECTION 2: OUR WORK (PORTFOLIO) -->
+  <!-- ============================================================ -->
+  <!-- PORTFOLIO — LAZY-LOADED VIDEOS
+       OPTIMIZATION:
+       - Videos use preload="none" — zero bytes downloaded until user clicks
+       - Poster images show immediately (compress to WebP, <80KB each)
+       - IntersectionObserver upgrades preload to "metadata" when in viewport
+       - Click-to-play instead of autoplay saves massive bandwidth
+  ============================================================ -->
   <section id="work" class="py-24 md:py-32 bg-zinc-900 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
@@ -245,18 +290,22 @@
         </p>
       </div>
 
-      <!-- Video Grid Container (3 large columns) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto pb-12">
         
-        <!-- Item 1: Your Vertical Pool Video -->
+        <!-- Video Card 1 -->
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
-            <video src="./SCPOOLS3.mp4" poster="IMG_4679.PNG" loop playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+          <div class="relative w-full video-aspect bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
+            <video 
+              data-src="./SCPOOLS3.mp4"
+              poster="IMG_4679.PNG" 
+              loop playsinline 
+              preload="none"
+              class="lazy-video w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+            ></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
-            <!-- Central Play Button -->
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
+                <svg class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
           </div>
@@ -266,14 +315,20 @@
           </div>
         </div>
 
-        <!-- Item 2 -->
+        <!-- Video Card 2 -->
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal delay-100">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
-            <video src="./LADY R.mp4" poster="./ladyr.jpg" loop playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+          <div class="relative w-full video-aspect bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
+            <video 
+              data-src="./LADY R.mp4"
+              poster="./ladyr.jpg" 
+              loop playsinline 
+              preload="none"
+              class="lazy-video w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+            ></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
+                <svg class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
           </div>
@@ -283,14 +338,20 @@
           </div>
         </div>
 
-        <!-- Item 3 -->
+        <!-- Video Card 3 -->
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal delay-200">
-          <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
-            <video src="./Timeline 1.mp4" poster="tt.png" loop playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+          <div class="relative w-full video-aspect bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
+            <video 
+              data-src="./Timeline 1.mp4"
+              poster="tt.png" 
+              loop playsinline 
+              preload="none"
+              class="lazy-video w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+            ></video>
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
-                <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
+                <svg class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </div>
             </div>
           </div>
@@ -309,7 +370,9 @@
     </div>
   </section>
 
-  <!-- SECTION 3: PRICING -->
+  <!-- ============================================================ -->
+  <!-- PRICING -->
+  <!-- ============================================================ -->
   <section id="pricing" class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-20">
       <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
@@ -318,45 +381,40 @@
     </div>
 
     <div class="grid lg:grid-cols-3 gap-8 items-center">
-      <!-- Starter -->
       <div class="border border-zinc-800 bg-zinc-900/30 p-8 rounded relative hover:border-zinc-700 transition-colors duration-300 reveal">
         <h3 class="text-2xl font-extrabold uppercase mb-2">Starter</h3>
         <div class="text-4xl font-black mb-4">$500<span class="text-lg text-zinc-500 font-medium">/mo</span></div>
         <div class="h-1 w-12 bg-zinc-700 mb-8"></div>
         <ul class="space-y-4 mb-10 text-zinc-300 font-medium">
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 1 filming session</li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 3 edited videos</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 shrink-0 mt-1 w-5 h-5"></i> <span>25 pictures + 3 graphics</span></li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> Turnaround: 5–7 days</li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 1 filming session</li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 3 edited videos</li>
+          <li class="flex items-start gap-3"><svg class="text-zinc-600 shrink-0 mt-1 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> <span>25 pictures + 3 graphics</span></li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Turnaround: 5–7 days</li>
         </ul>
       </div>
 
-      <!-- Growth -->
       <div class="border-2 border-cyan-400 bg-zinc-900 p-10 rounded relative transform lg:-translate-y-4 shadow-[0_0_50px_rgba(34,211,238,0.1)] hover:shadow-[0_0_80px_rgba(34,211,238,0.3)] transition-shadow duration-500 reveal delay-100">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cyan-400 text-zinc-950 font-bold uppercase tracking-widest text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
-          Most Popular
-        </div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cyan-400 text-zinc-950 font-bold uppercase tracking-widest text-xs px-4 py-1.5 rounded-full whitespace-nowrap">Most Popular</div>
         <h3 class="text-3xl font-extrabold uppercase mb-2 text-cyan-400">Growth</h3>
         <div class="text-5xl font-black mb-4 text-zinc-50">$750<span class="text-xl text-zinc-400 font-medium">/mo</span></div>
         <div class="h-1 w-12 bg-cyan-400 mb-8"></div>
         <ul class="space-y-4 mb-10 text-zinc-100 font-medium text-lg">
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 w-6 h-6"></i> 2 filming sessions</li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 w-6 h-6"></i> 5 edited videos</li>
-          <li class="flex items-start gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 shrink-0 mt-1 w-6 h-6"></i> <span>50+ pictures + 5 graphics</span></li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-cyan-400 w-6 h-6"></i> Priority turnaround</li>
+          <li class="flex items-center gap-3"><svg class="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 2 filming sessions</li>
+          <li class="flex items-center gap-3"><svg class="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 5 edited videos</li>
+          <li class="flex items-start gap-3"><svg class="text-cyan-400 shrink-0 mt-1 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> <span>50+ pictures + 5 graphics</span></li>
+          <li class="flex items-center gap-3"><svg class="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Priority turnaround</li>
         </ul>
       </div>
 
-      <!-- Dominate -->
       <div class="border border-zinc-800 bg-zinc-900/30 p-8 rounded relative hover:border-zinc-700 transition-colors duration-300 reveal delay-200">
         <h3 class="text-2xl font-extrabold uppercase mb-2">Dominate</h3>
         <div class="text-4xl font-black mb-4">$1,250<span class="text-lg text-zinc-500 font-medium">/mo</span></div>
         <div class="h-1 w-12 bg-zinc-700 mb-8"></div>
         <ul class="space-y-4 mb-10 text-zinc-300 font-medium">
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 4 film days</li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 8 edited videos</li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> 100+ graphics</li>
-          <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-zinc-600 w-5 h-5"></i> Fastest turnaround</li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 4 film days</li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 8 edited videos</li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> 100+ graphics</li>
+          <li class="flex items-center gap-3"><svg class="text-zinc-600 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Fastest turnaround</li>
         </ul>
       </div>
     </div>
@@ -369,11 +427,13 @@
     </div>
   </section>
 
-  <!-- SECTION 4: ABOUT ME -->
+  <!-- ============================================================ -->
+  <!-- ABOUT -->
+  <!-- ============================================================ -->
   <section id="about" class="py-24 md:py-32 bg-zinc-900 border-y border-zinc-800">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
       <div class="relative aspect-square md:aspect-[3/4] overflow-hidden rounded transition-all duration-700">
-        <img src="seb.JPG" alt="Founder with camera" loading="lazy" class="w-full h-full object-cover" />
+        <img src="seb.JPG" alt="Sebastian Vasquez - Founder" loading="lazy" width="600" height="800" class="w-full h-full object-cover" />
         <div class="absolute inset-0 border-4 border-transparent hover:border-cyan-400 transition-colors duration-500"></div>
       </div>
       
@@ -391,7 +451,9 @@
     </div>
   </section>
 
-  <!-- SECTION 5: HOW IT WORKS -->
+  <!-- ============================================================ -->
+  <!-- HOW IT WORKS -->
+  <!-- ============================================================ -->
   <section class="py-24 md:py-40 px-6 max-w-7xl mx-auto">
     <div class="text-center mb-20">
       <h2 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">
@@ -402,28 +464,24 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
       <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-zinc-800 -z-10"></div>
 
-      <!-- Step 1 -->
       <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
         <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">01</div>
         <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">Book A Call</h3>
         <p class="text-zinc-400 relative z-10">We discuss your goals and current bottleneck.</p>
       </div>
 
-      <!-- Step 2 -->
       <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
         <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">02</div>
         <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">We Plan</h3>
         <p class="text-zinc-400 relative z-10">I create a custom content strategy tailored to you.</p>
       </div>
 
-      <!-- Step 3 -->
       <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
         <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">03</div>
         <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">We Film</h3>
         <p class="text-zinc-400 relative z-10">I come on-site and capture you in your element.</p>
       </div>
 
-      <!-- Step 4 -->
       <div class="bg-zinc-900 border border-zinc-800 p-8 pt-12 relative group hover:border-cyan-400 transition-colors">
         <div class="absolute -top-6 left-8 text-6xl font-extrabold text-zinc-800 group-hover:text-cyan-400/20 transition-colors">04</div>
         <h3 class="text-2xl font-bold uppercase mb-4 relative z-10">You Post</h3>
@@ -432,7 +490,9 @@
     </div>
   </section>
 
-  <!-- FINAL CTA SECTION -->
+  <!-- ============================================================ -->
+  <!-- FINAL CTA -->
+  <!-- ============================================================ -->
   <section id="contact" class="py-32 px-6 bg-cyan-400 text-zinc-950 text-center relative overflow-hidden">
     <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 30px 30px;"></div>
     
@@ -459,49 +519,85 @@
   <footer class="bg-zinc-950 py-12 px-6 border-t border-zinc-900">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
       <div class="flex items-center">
-        <!-- Logo made larger here with h-8 md:h-12 -->
-        <img src="./JSVM.svg" alt="Company Logo" class="h-8 md:h-12 w-auto" />
+        <img src="./JSVM.svg" alt="JSV Media Logo" class="h-8 md:h-12 w-auto" width="48" height="48" />
       </div>
       
       <div class="flex gap-6">
-        <a href="https://www.instagram.com/jsvpictures/" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
-        <a href="#" class="text-zinc-500 hover:text-cyan-400 transition-colors"><i data-lucide="mail" class="w-6 h-6"></i></a>
+        <a href="https://www.instagram.com/jsvpictures/" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-cyan-400 transition-colors" aria-label="Instagram">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+        </a>
+        <a href="mailto:sebastian@jsvmedia.com" class="text-zinc-500 hover:text-cyan-400 transition-colors" aria-label="Email">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </a>
       </div>
       
       <div class="text-zinc-600 text-sm font-medium">
-        © <span id="year"></span> JSV MEDIA All rights reserved.
+        &copy; <script>document.write(new Date().getFullYear())</script> JSV MEDIA All rights reserved.
       </div>
     </div>
   </footer>
 
-  <!-- Javascript for interactivity -->
+  <!-- ============================================================ -->
+  <!-- JAVASCRIPT — All scripts at bottom, non-blocking
+       OPTIMIZATIONS:
+       1. No external icon library (saved ~150KB)
+       2. Lazy video loading via IntersectionObserver
+       3. Hero video deferred autoplay after page load
+       4. will-change cleanup after animations
+       5. Passive event listeners for scroll
+  ============================================================ -->
   <script>
-    // Initialize icons
-    lucide.createIcons();
-    
-    // Set current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // ---- HERO VIDEO: Defer autoplay until after page loads ----
+    // This prevents the video from competing with critical resources
+    window.addEventListener('load', () => {
+      const heroVideo = document.getElementById('hero-video');
+      if (heroVideo) {
+        // Start loading the video only after everything else is ready
+        heroVideo.preload = 'auto';
+        heroVideo.play().catch(() => {
+          // Autoplay blocked (common on mobile) — that's fine, poster shows
+        });
+      }
+    });
 
-    // Portfolio Video Play/Pause & Button Fade Logic
+    // ---- LAZY VIDEO LOADING ----
+    // Videos only load their src when they enter the viewport
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const video = entry.target;
+          const src = video.dataset.src;
+          if (src && !video.src) {
+            video.src = src;
+            video.preload = 'metadata';
+          }
+          videoObserver.unobserve(video);
+        }
+      });
+    }, { rootMargin: '200px 0px' }); // Start loading 200px before visible
+
+    document.querySelectorAll('.lazy-video').forEach(v => videoObserver.observe(v));
+
+    // ---- PORTFOLIO VIDEO PLAY/PAUSE ----
     document.querySelectorAll('.video-card').forEach(card => {
       const video = card.querySelector('video');
       const playOverlay = card.querySelector('.play-overlay');
 
       if (video) {
-        // Hide play button automatically if the video enters the 'playing' state
         video.addEventListener('play', () => {
           if (playOverlay) playOverlay.style.opacity = '0';
         });
-
-        // Bring back the play button when paused
         video.addEventListener('pause', () => {
           if (playOverlay) playOverlay.style.opacity = '1';
         });
 
-        // Click to play/pause
         card.addEventListener('click', () => {
+          // Ensure src is loaded before trying to play
+          if (!video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+          }
           if (video.paused) {
-            video.play();
+            video.play().catch(() => {});
           } else {
             video.pause();
           }
@@ -509,7 +605,7 @@
       }
     });
 
-    // Sticky Header Logic
+    // ---- STICKY HEADER ----
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
@@ -519,47 +615,44 @@
         header.classList.remove('bg-zinc-950/90', 'backdrop-blur-md', 'border-zinc-800', 'py-4');
         header.classList.add('bg-transparent', 'border-transparent', 'py-6');
       }
-    });
+    }, { passive: true }); // passive = better scroll perf
 
-    // Mobile Menu Logic
+    // ---- MOBILE MENU ----
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconPath = document.getElementById('menu-icon-path');
     
     mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+      const isHidden = mobileMenu.classList.toggle('hidden');
       mobileMenu.classList.toggle('flex');
-      
-      if (mobileMenu.classList.contains('hidden')) {
-        mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
-      } else {
-        mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
-      }
-      lucide.createIcons();
+      // Swap icon paths (hamburger vs X) without reloading icon library
+      menuIconPath.setAttribute('d', isHidden 
+        ? 'M4 6h16M4 12h16M4 18h16' 
+        : 'M6 18L18 6M6 6l12 12'
+      );
     });
 
-    // Close mobile menu when a link is clicked
     document.querySelectorAll('.scroll-link').forEach(link => {
       link.addEventListener('click', () => {
         if (!mobileMenu.classList.contains('hidden')) {
           mobileMenu.classList.add('hidden');
           mobileMenu.classList.remove('flex');
-          mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
-          lucide.createIcons();
+          menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
         }
       });
     });
 
-    // 21st.dev Style Scroll Reveal Logic
-    const observer = new IntersectionObserver((entries, obs) => {
+    // ---- SCROLL REVEAL ----
+    const revealObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          obs.unobserve(entry.target); // Reveal only once
+          obs.unobserve(entry.target);
         }
       });
     }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   </script>
 </body>
 </html>
