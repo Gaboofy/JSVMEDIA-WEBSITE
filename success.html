@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Received | Creative Co.</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            zinc: {
+              50: '#fafafa', 100: '#f4f4f5', 300: '#d4d4d8', 400: '#a1a1aa',
+              500: '#71717a', 600: '#52525b', 700: '#3f3f46', 800: '#27272a',
+              900: '#18181b', 950: '#09090b',
+            },
+            cyan: {
+              300: '#67e8f9', 400: '#22d3ee', 500: '#06b6d4',
+            }
+          },
+          animation: {
+            'shimmer': 'shimmer 2.5s linear infinite',
+          },
+          keyframes: {
+            shimmer: {
+              '0%': { backgroundPosition: '200% 0' },
+              '100%': { backgroundPosition: '-200% 0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* 21st.dev Style Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(4px);
+      animation: revealAnimation 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes revealAnimation {
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-950 text-zinc-50 font-sans selection:bg-cyan-400 selection:text-zinc-950 flex flex-col">
+
+  <!-- MINIMAL HEADER -->
+  <header class="w-full border-b border-zinc-900 py-6 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-6 flex justify-center items-center">
+      <a href="index.html" class="cursor-pointer">
+        <img src="./JSVM.svg" alt="Company Logo" class="h-10 md:h-12 w-auto" />
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow flex flex-col items-center pt-16 pb-32 px-6">
+    <div class="max-w-3xl w-full text-center">
+      
+      <!-- Confirmation Header -->
+      <div class="mb-16 reveal">
+        <div class="w-20 h-20 bg-cyan-400/20 text-cyan-400 rounded-full flex items-center justify-center mx-auto mb-8 border border-cyan-400/50 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+          <i data-lucide="check" class="w-10 h-10"></i>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4 text-white">
+          You're In — <br class="md:hidden" /><span class="text-cyan-400">Request Received</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-zinc-400 font-medium">
+          I have your details. I will personally be calling you shortly from <span class="text-white font-bold">(Your Area Code)</span>.
+        </p>
+      </div>
+
+      <!-- Video Section -->
+      <div class="mb-20 reveal delay-100 bg-zinc-900 border border-zinc-800 p-6 md:p-10 rounded-2xl">
+        <h2 class="text-2xl md:text-3xl font-extrabold uppercase tracking-tighter mb-2">Quick Intro So You Know Who You're Talking To</h2>
+        <p class="text-zinc-400 mb-8 font-medium">Watch this quick 60-second video before we chat.</p>
+        
+        <!-- Vertical Video Container (Optimized for a phone-recorded intro) -->
+        <div class="relative w-full max-w-sm mx-auto aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 shadow-2xl">
+          <!-- Replace this with a quick intro video of yourself -->
+          <video src="./intro-video.mp4" controls playsinline class="w-full h-full object-cover"></video>
+        </div>
+      </div>
+
+      <!-- What Happens Next -->
+      <div class="mb-16 text-left reveal delay-200">
+        <h3 class="text-2xl md:text-3xl font-extrabold uppercase tracking-tighter mb-8 text-center">What Happens Next?</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-xl relative overflow-hidden">
+            <div class="absolute -top-4 -right-4 text-6xl font-black text-zinc-800/50">1</div>
+            <div class="w-10 h-10 bg-cyan-400/10 rounded-lg flex items-center justify-center text-cyan-400 mb-4 border border-cyan-400/20">
+              <i data-lucide="phone-call" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-lg font-bold uppercase tracking-tight mb-2">The Call</h4>
+            <p class="text-zinc-400 text-sm">I'll call you to discuss your goals, your current leads, and what kind of projects you want more of.</p>
+          </div>
+          
+          <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-xl relative overflow-hidden">
+            <div class="absolute -top-4 -right-4 text-6xl font-black text-zinc-800/50">2</div>
+            <div class="w-10 h-10 bg-cyan-400/10 rounded-lg flex items-center justify-center text-cyan-400 mb-4 border border-cyan-400/20">
+              <i data-lucide="calendar" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-lg font-bold uppercase tracking-tight mb-2">Plan Shoot</h4>
+            <p class="text-zinc-400 text-sm">We'll schedule a time for me to come on-site and capture you in your element doing what you do best.</p>
+          </div>
+          
+          <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-xl relative overflow-hidden">
+            <div class="absolute -top-4 -right-4 text-6xl font-black text-zinc-800/50">3</div>
+            <div class="w-10 h-10 bg-cyan-400/10 rounded-lg flex items-center justify-center text-cyan-400 mb-4 border border-cyan-400/20">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-lg font-bold uppercase tracking-tight mb-2">Risk-Free Content</h4>
+            <p class="text-zinc-400 text-sm">I edit the content. You review it. You don't pay a dime unless you are completely happy with the results.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expectation / Optional CTA -->
+      <div class="bg-cyan-400 text-zinc-950 p-8 md:p-12 rounded-2xl text-center reveal delay-300 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#000 2px, transparent 2px); background-size: 20px 20px;"></div>
+        <div class="relative z-10">
+          <h3 class="text-2xl md:text-4xl font-extrabold uppercase tracking-tighter mb-4">Keep an eye on your phone</h3>
+          <p class="text-lg font-medium mb-8">If you're busy and prefer to just lock in a time right now, you can skip the wait and schedule our chat directly below.</p>
+          
+          <a href="https://calendly.com/sebastian-jsvmedia/content-creation-consultation" target="_blank" rel="noopener noreferrer" class="inline-block bg-zinc-950 text-cyan-400 px-10 py-5 font-extrabold text-lg uppercase tracking-wider hover:bg-zinc-800 transition-all hover:scale-105 shadow-xl rounded-lg">
+            Schedule Your Call Now
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-zinc-950 py-12 px-6 border-t border-zinc-900 mt-auto">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <img src="./JSVM.svg" alt="Company Logo" class="h-6 md:h-8 w-auto opacity-50" />
+      <div class="text-zinc-600 text-sm font-medium">
+        © <span id="year"></span> Creative Co. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
