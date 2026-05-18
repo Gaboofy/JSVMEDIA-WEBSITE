@@ -505,9 +505,14 @@
             <input type="text" name="name" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:outline-none transition-colors" placeholder="John Doe">
           </div>
           <div class="space-y-2">
-            <label class="text-xs font-bold tracking-widest text-cyan-400 uppercase">Phone Number</label>
-            <input type="tel" name="phone" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:outline-none transition-colors" placeholder="(555) 555-5555">
+            <label class="text-xs font-bold tracking-widest text-cyan-400 uppercase">Business Name</label>
+            <input type="text" name="business_name" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:outline-none transition-colors" placeholder="Your Company LLC">
           </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-xs font-bold tracking-widest text-cyan-400 uppercase">Phone Number</label>
+          <input type="tel" name="phone" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:outline-none transition-colors" placeholder="(555) 555-5555">
         </div>
 
         <div class="space-y-2">
@@ -596,23 +601,21 @@
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
       
+      // Use keepalive to let the browser finish the POST request even after redirecting
       fetch('https://services.leadconnectorhq.com/hooks/38XY3fB8w05GLwGIPoOp/webhook-trigger/b806ef46-760d-4bf6-8644-f411039ac99c', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        // Redirect to success page regardless of GHL response to ensure smooth user experience
+        body: JSON.stringify(data),
+        keepalive: true
+      }).catch(console.error);
+
+      // Instant redirect after a split second (400ms) to let the loading animation flash and look fast
+      setTimeout(() => {
         window.location.href = 'success.html';
-      })
-      .catch((error) => {
-        console.error('Submission Error:', error);
-        // Fallback: If ad-blockers block the fetch request, still send them to the success page
-        window.location.href = 'success.html';
-      });
+      }, 400);
     });
 
     // Portfolio Video Play/Pause & Button Fade Logic
