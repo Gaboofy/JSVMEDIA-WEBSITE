@@ -496,8 +496,8 @@
         <p class="text-zinc-400 font-medium">How Many Jobs Are You Missing Because You're Not Showing Your Work Online?</p>
       </div>
       
-      <!-- Formspree intercept form -->
-      <form id="funnel-form" action="https://formspree.io/f/xbdwlkzw" method="POST" class="space-y-6 text-left">
+      <!-- GHL Webhook form -->
+      <form id="funnel-form" class="space-y-6 text-left">
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
@@ -585,7 +585,7 @@
       }, 300);
     }
 
-    // Handle Form Submission invisibly with Formspree, then redirect
+    // Handle Form Submission invisibly with GHL Webhook, then redirect
     document.getElementById('funnel-form').addEventListener('submit', function(e) {
       e.preventDefault(); // Stop page from refreshing
       
@@ -594,21 +594,19 @@
       submitBtn.disabled = true;
 
       const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
       
-      fetch('https://formspree.io/f/xbdwlkzw', {
+      fetch('https://services.leadconnectorhq.com/hooks/38XY3fB8w05GLwGIPoOp/webhook-trigger/7fc8733a-72eb-400e-8dcc-50fffd7232c7', {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: formData
+        body: JSON.stringify(data)
       })
       .then(response => {
-        if (response.ok) {
-          window.location.href = 'success.html';
-        } else {
-          console.error('Formspree returned an error');
-          window.location.href = 'success.html'; // Fallback redirect just in case
-        }
+        // Redirect to success page regardless of GHL response to ensure smooth user experience
+        window.location.href = 'success.html';
       })
       .catch((error) => {
         console.error('Submission Error:', error);
