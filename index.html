@@ -125,8 +125,9 @@
   <!-- HERO SECTION -->
   <section id="hero" class="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 flex flex-col items-center text-center overflow-hidden">
     <!-- Background Video -->
-    <div class="absolute inset-0 z-0 pointer-events-none bg-zinc-950">
-      <video src="./SCPOOLS3.mp4" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-40"></video>
+    <div class="absolute inset-0 z-0 pointer-events-none bg-zinc-950 overflow-hidden">
+      <!-- Vimeo iframe with CSS trick to perfectly 'object-cover' the background -->
+      <iframe src="https://player.vimeo.com/video/1196025956?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;background=1&amp;muted=1&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-40" title="Murrieta Pools"></iframe>
       <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/40 via-zinc-950/80 to-zinc-950"></div>
     </div>
 
@@ -273,9 +274,13 @@
         </div>
 
         <!-- Item 2 -->
-        <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal delay-100">
+        <div class="video-card vimeo-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal delay-100">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
-            <video src="./bwreel.mp4" poster="./bwimage.jpg" loop playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
+            <iframe src="https://player.vimeo.com/video/1196028445?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" class="absolute top-0 left-0 w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 pointer-events-none" title="Murrieta Pools LC Reel"></iframe>
+            
+            <!-- Custom Thumbnail Overlay -->
+            <img src="./IMG_8987.jpg" alt="Murrieta Pools Thumbnail" class="vimeo-thumb absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-90 group-hover:opacity-100 group-hover:scale-105 pointer-events-none" />
+
             <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
@@ -284,8 +289,8 @@
             </div>
           </div>
           <div>
-            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Landscaping</span>
-            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Backyard Transformation</h3>
+            <span class="text-sm font-bold tracking-widest text-cyan-400 mb-2 block uppercase">Contracting</span>
+            <h3 class="text-xl md:text-2xl font-bold uppercase tracking-tight leading-tight">Murrieta Pools Reel</h3>
           </div>
         </div>
 
@@ -540,7 +545,7 @@
 
         <div class="space-y-2">
           <label class="text-xs font-bold tracking-widest text-cyan-400 uppercase">Are you currently running ads?</label>
-          <select name="running_ads" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:outline-none transition-colors appearance-none cursor-pointer">
+          <select name="running_adThis" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 focus:outline-none transition-colors appearance-none cursor-pointer">
             <option value="" disabled selected>Select an option...</option>
             <option value="Yes">Yes (Facebook, Instagram, Google, etc.)</option>
             <option value="No">No</option>
@@ -558,6 +563,9 @@
       </form>
     </div>
   </div>
+
+  <!-- Vimeo Player API -->
+  <script src="https://player.vimeo.com/api/player.js"></script>
 
   <!-- Javascript for interactivity -->
   <script>
@@ -602,7 +610,7 @@
       const data = Object.fromEntries(formData.entries());
       
       // Use keepalive to let the browser finish the POST request even after redirecting
-      fetch('https://services.leadconnectorhq.com/hooks/38XY3fB8w05GLwGIPoOp/webhook-trigger/b806ef46-760d-4bf6-8644-f411039ac99c', {
+      fetch('https://services.leadconnectorhq.com/hooks/38XY3fB8w05GLwGIPoOp/webhook-trigger/7fc8733a-72eb-400e-8dcc-50fffd7232c7', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -618,8 +626,8 @@
       }, 400);
     });
 
-    // Portfolio Video Play/Pause & Button Fade Logic
-    document.querySelectorAll('.video-card').forEach(card => {
+    // Portfolio Video Play/Pause & Button Fade Logic (Native Videos)
+    document.querySelectorAll('.video-card:not(.vimeo-card)').forEach(card => {
       const video = card.querySelector('video');
       const playOverlay = card.querySelector('.play-overlay');
 
@@ -641,6 +649,36 @@
           } else {
             video.pause();
           }
+        });
+      }
+    });
+
+    // Vimeo Portfolio Cards Logic
+    document.querySelectorAll('.vimeo-card').forEach(card => {
+      const iframe = card.querySelector('iframe');
+      const playOverlay = card.querySelector('.play-overlay');
+      const thumb = card.querySelector('.vimeo-thumb');
+
+      if (iframe && window.Vimeo) {
+        const player = new Vimeo.Player(iframe);
+
+        player.on('play', () => {
+          if (playOverlay) playOverlay.style.opacity = '0';
+          if (thumb) thumb.style.opacity = '0'; // Fade out thumbnail smoothly when video starts
+        });
+
+        player.on('pause', () => {
+          if (playOverlay) playOverlay.style.opacity = '1';
+        });
+
+        card.addEventListener('click', () => {
+          player.getPaused().then(paused => {
+            if (paused) {
+              player.play();
+            } else {
+              player.pause();
+            }
+          });
         });
       }
     });
