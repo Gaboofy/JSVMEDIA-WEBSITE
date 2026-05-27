@@ -256,10 +256,14 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto pb-12">
         
         <!-- Item 1: Your Vertical Pool Video -->
-        <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal">
+        <div class="video-card vimeo-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
-            <video src="./SCPOOLS3.mp4" poster="IMG_4679.PNG" loop playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <iframe src="https://player.vimeo.com/video/1196028766?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" class="absolute top-0 left-0 w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 pointer-events-none" title="SCPOOLS 4"></iframe>
+            
+            <!-- Custom Thumbnail Overlay -->
+            <img src="IMG_4679.PNG" alt="Pool Builds Thumbnail" class="vimeo-thumb absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-90 group-hover:opacity-100 group-hover:scale-105 pointer-events-none" />
+
+            <div class="dark-overlay absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <!-- Central Play Button -->
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
@@ -279,9 +283,9 @@
             <iframe src="https://player.vimeo.com/video/1196028445?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" class="absolute top-0 left-0 w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 pointer-events-none" title="Murrieta Pools LC Reel"></iframe>
             
             <!-- Custom Thumbnail Overlay -->
-            <img src="./IMG_8987.jpg" alt="Murrieta Pools Thumbnail" class="vimeo-thumb absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-90 group-hover:opacity-100 group-hover:scale-105 pointer-events-none" />
+            <img src="./IMG_8987.webp" alt="Murrieta Pools Thumbnail" class="vimeo-thumb absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-90 group-hover:opacity-100 group-hover:scale-105 pointer-events-none" />
 
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <div class="dark-overlay absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
@@ -298,7 +302,7 @@
         <div class="video-card group cursor-pointer flex flex-col mx-auto w-full max-w-sm md:max-w-none reveal delay-200">
           <div class="relative w-full aspect-[9/16] bg-zinc-950 overflow-hidden rounded-xl border border-zinc-800 group-hover:border-cyan-400 transition-colors mb-6">
             <video src="./Timeline 1.mp4" poster="tt.png" loop playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"></video>
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
+            <div class="dark-overlay absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 pointer-events-none"></div>
             <div class="play-overlay absolute inset-0 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 pointer-events-none">
               <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-zinc-50 shadow-lg flex items-center justify-center">
                 <i data-lucide="play" class="text-zinc-950 ml-1 w-6 h-6 md:w-8 md:h-8 fill-zinc-950"></i>
@@ -630,16 +634,21 @@
     document.querySelectorAll('.video-card:not(.vimeo-card)').forEach(card => {
       const video = card.querySelector('video');
       const playOverlay = card.querySelector('.play-overlay');
+      const darkOverlay = card.querySelector('.dark-overlay');
 
       if (video) {
         // Hide play button automatically if the video enters the 'playing' state
         video.addEventListener('play', () => {
           if (playOverlay) playOverlay.style.opacity = '0';
+          if (darkOverlay) darkOverlay.style.opacity = '0';
+          video.style.opacity = '1';
         });
 
         // Bring back the play button when paused
         video.addEventListener('pause', () => {
           if (playOverlay) playOverlay.style.opacity = '1';
+          if (darkOverlay) darkOverlay.style.opacity = '';
+          video.style.opacity = '';
         });
 
         // Click to play/pause
@@ -658,6 +667,7 @@
       const iframe = card.querySelector('iframe');
       const playOverlay = card.querySelector('.play-overlay');
       const thumb = card.querySelector('.vimeo-thumb');
+      const darkOverlay = card.querySelector('.dark-overlay');
 
       if (iframe && window.Vimeo) {
         const player = new Vimeo.Player(iframe);
@@ -665,10 +675,14 @@
         player.on('play', () => {
           if (playOverlay) playOverlay.style.opacity = '0';
           if (thumb) thumb.style.opacity = '0'; // Fade out thumbnail smoothly when video starts
+          if (darkOverlay) darkOverlay.style.opacity = '0';
+          iframe.style.opacity = '1';
         });
 
         player.on('pause', () => {
           if (playOverlay) playOverlay.style.opacity = '1';
+          if (darkOverlay) darkOverlay.style.opacity = '';
+          iframe.style.opacity = '';
         });
 
         card.addEventListener('click', () => {
